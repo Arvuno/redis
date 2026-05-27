@@ -26,6 +26,7 @@ This document serves as both a quick start guide to Redis and a detailed resourc
   - [Build and run Redis with all data structures - Ubuntu 20.04 (Focal)](#build-and-run-redis-with-all-data-structures---ubuntu-2004-focal)
   - [Build and run Redis with all data structures - Ubuntu 22.04 (Jammy)](#build-and-run-redis-with-all-data-structures---ubuntu-2204-jammy)
   - [Build and run Redis with all data structures - Ubuntu 24.04 (Noble)](#build-and-run-redis-with-all-data-structures---ubuntu-2404-noble)
+  - [Build and run Redis with all data structures - Ubuntu 26.04 (Jammy)](#build-and-run-redis-with-all-data-structures---ubuntu-2604-jammy)
   - [Build and run Redis with all data structures - Debian 11 (Bullseye) / 12 (Bookworm)](#build-and-run-redis-with-all-data-structures---debian-11-bullseye--12-bookworm)
   - [Build and run Redis with all data structures - AlmaLinux 8.10 / Rocky Linux 8.10](#build-and-run-redis-with-all-data-structures---almalinux-810--rocky-linux-810)
   - [Build and run Redis with all data structures - AlmaLinux 9.5 / Rocky Linux 9.5](#build-and-run-redis-with-all-data-structures---almalinux-95--rocky-linux-95)
@@ -372,6 +373,59 @@ Tested with the following Docker image:
 
    Replace `<version>` with the Redis version, for example: `8.0.0`.
 
+   ```sh
+   cd /usr/src
+   wget -O redis-<version>.tar.gz https://github.com/redis/redis/archive/refs/tags/<version>.tar.gz
+   ```
+
+3. Extract the source archive
+
+   Create a directory for the source code and extract the contents into it:
+
+   ```sh
+   cd /usr/src
+   tar xvf redis-<version>.tar.gz
+   rm redis-<version>.tar.gz
+   ```
+
+4. Build Redis
+
+   Set the necessary environment variables and build Redis:
+
+   ```sh
+   cd /usr/src/redis-<version>
+   export BUILD_TLS=yes BUILD_WITH_MODULES=yes INSTALL_RUST_TOOLCHAIN=yes
+   make -j "$(nproc)" all
+   ```
+
+5. Run Redis
+
+   ```sh
+   cd /usr/src/redis-<version>
+   ./src/redis-server redis-full.conf
+   ```
+
+### Build and run Redis with all data structures - Ubuntu 26.04 (Jammy)
+
+Tested with the following Docker image:
+
+- ubuntu:26.04
+
+1. Install required dependencies
+
+   Update your package lists and install the necessary development tools and libraries:
+
+   ```sh
+   apt-get update
+   apt-get install -y sudo
+   sudo apt-get install -y --no-install-recommends ca-certificates wget dpkg-dev gcc g++ libc6-dev libssl-dev make git cmake python3 python3-pip python3-venv python3-dev unzip rsync clang automake autoconf libtool
+   ```
+
+2. Download the Redis source
+
+   Download a specific version of the Redis source code archive from GitHub.
+
+   Replace `<version>` with the Redis version, for example: `8.0.0`.
    ```sh
    cd /usr/src
    wget -O redis-<version>.tar.gz https://github.com/redis/redis/archive/refs/tags/<version>.tar.gz
