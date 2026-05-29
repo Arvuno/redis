@@ -116,3 +116,6 @@ view, and so forth. This helps.
 4. For minor fixes - open a pull request on GitHub.
 
 Additional information on the RSALv2/SSPLv1/AGPLv3 tri-license is also found in the LICENSE.txt file.
+
+<!-- Thanks for contributing! -->
+
